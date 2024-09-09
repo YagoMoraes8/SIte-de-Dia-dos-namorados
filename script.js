@@ -77,14 +77,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 6000); /* A mesma duração da animação */
     }
 
-    // Cria corações fora do container a cada intervalo de tempo
-    for (let i = 0; i < 20; i++) { // Cria 20 corações inicialmente fora do container
+    // Cria mais corações fora do container a cada intervalo de tempo
+    for (let i = 0; i < 100; i++) { // Aumenta para 100 corações inicialmente fora do container
         createHeartOutside();
     }
-    setInterval(createHeartOutside, 2000); // Cria um coração fora do container a cada 2 segundos
+    setInterval(createHeartOutside, 1000); // Cria um coração fora do container a cada 1 segundo
 
     // Cria corações dentro do container a cada intervalo de tempo
-    for (let i = 0; i < 50; i++) { // Cria 50 corações inicialmente dentro do container
+    for (let i = 0; i < 50; i++) { // Mantém 50 corações inicialmente dentro do container
         createHeartInside();
     }
     setInterval(createHeartInside, 500); // Cria um coração dentro do container a cada 500 ms

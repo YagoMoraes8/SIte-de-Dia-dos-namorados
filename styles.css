@@ -127,11 +127,11 @@ header p {
 /* Estilo responsivo */
 @media (max-width: 600px) {
     header h1 {
-        font-size: 8vw; /* Tamanho da fonte para dispositivos móveis */
+        font-size: 18vw; /* Tamanho da fonte para dispositivos móveis */
     }
 
     header p {
-        font-size: 6vw; /* Tamanho da fonte para dispositivos móveis */
+        font-size: 16vw; /* Tamanho da fonte para dispositivos móveis */
     }
 
     .carousel-images img {

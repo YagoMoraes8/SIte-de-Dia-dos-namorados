@@ -13,23 +13,30 @@ body {
 
 .container {
     text-align: center;
+    margin: 10px 0;
     max-width: 600px;
     padding: 20px;
     position: relative;
-    z-index: 10; /* Garante que a div "container" esteja acima dos corações */
-    background-color: rgba(0, 0, 0, 0.7); /* Adiciona um fundo para destacar a área principal */
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.849);
     border-radius: 8px;
-    overflow: hidden; /* Garante que os corações não apareçam dentro da div "container" */
+    overflow: hidden;
 }
 
 header h1 {
     margin: 20px 0;
-    font-size: 24px;
+    font-size: 30px;
+    color: #ff69b4;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #000000;
 }
 
 header p {
     margin: 5px 0;
-    font-size: 16px;
+    font-size: 22px;
+    color: #ff69b4;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
 }
 
 .carousel {
@@ -64,9 +71,12 @@ header p {
     margin: 20px 0;
     line-height: 1.5;
     padding: 10px;
+    color: #000000;
     border: 1px dashed #ff69b4;
     border-radius: 10px;
     background-color: rgba(255, 182, 193, 0.1);
+    position: relative;
+    z-index: 5;
 }
 
 .heart {
@@ -75,11 +85,16 @@ header p {
     height: 60px;
     background: url('img/heart.png') no-repeat center center;
     background-size: contain;
-    animation: float 5s infinite;
     pointer-events: none;
-    z-index: 1; /* Garante que os corações fiquem atrás da div "container" */
+    z-index: 1;
 }
 
+/* Corações flutuantes fora do container */
+.heart.outside {
+    animation: float 5s infinite;
+}
+
+/* Animação de flutuação para corações fora do container */
 @keyframes float {
     0% {
         transform: translateY(0) scale(0.8);
@@ -92,5 +107,24 @@ header p {
     100% {
         transform: translateY(-60px) scale(0.8);
         opacity: 0;
+    }
+}
+
+/* Corações caindo dentro do container */
+.heart.inside {
+    animation: fall 6s infinite;
+}
+
+/* Animação de queda para corações dentro do container */
+@keyframes fall {
+    0% {
+        top: -10%;
+        opacity: 1;
+        transform: scale(0.8);
+    }
+    100% {
+        top: 100%;
+        opacity: 0;
+        transform: scale(1.2);
     }
 }

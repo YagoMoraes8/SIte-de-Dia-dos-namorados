@@ -31,11 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
     atualizarContador();
     setInterval(atualizarContador, 1000);
 
-    // Função para criar corações flutuantes
-    function createHeart() {
+    // Função para criar corações fora do container
+    function createHeartOutside() {
         const heart = document.createElement('div');
-        heart.classList.add('heart');
-
+        heart.classList.add('heart', 'outside');
+        
         // Define uma posição aleatória na tela, fora da div ".container"
         const container = document.querySelector('.container');
         const containerRect = container.getBoundingClientRect();
@@ -60,9 +60,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 5000);
     }
 
-    // Cria corações a cada intervalo de tempo
-    for (let i = 0; i < 20; i++) { // Cria 20 corações inicialmente
-        createHeart();
+    // Função para criar corações caindo dentro do container
+    function createHeartInside() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart', 'inside');
+        
+        const container = document.querySelector('.container');
+        heart.style.top = `-${Math.random() * 10}%`; /* Começa em uma posição aleatória um pouco acima do container */
+        heart.style.left = `${Math.random() * 100}%`; /* Posição lateral aleatória dentro do container */
+        
+        container.appendChild(heart);
+
+        // Remove o coração após o fim da animação
+        setTimeout(() => {
+            heart.remove();
+        }, 6000); /* A mesma duração da animação */
     }
-    setInterval(createHeart, 2000);
+
+    // Cria corações fora do container a cada intervalo de tempo
+    for (let i = 0; i < 20; i++) { // Cria 20 corações inicialmente fora do container
+        createHeartOutside();
+    }
+    setInterval(createHeartOutside, 2000); // Cria um coração fora do container a cada 2 segundos
+
+    // Cria corações dentro do container a cada intervalo de tempo
+    for (let i = 0; i < 50; i++) { // Cria 50 corações inicialmente dentro do container
+        createHeartInside();
+    }
+    setInterval(createHeartInside, 500); // Cria um coração dentro do container a cada 500 ms
 });

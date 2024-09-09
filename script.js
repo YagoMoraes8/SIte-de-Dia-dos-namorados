@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Carrossel de imagens
     const images = document.querySelectorAll('.carousel-images img');
     let currentIndex = 0;
 
@@ -9,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
         images[currentIndex].classList.add('active');
     }, 5000);
 
-    // Função para atualizar o contador de tempo
     function atualizarContador() {
         const startDate = new Date('2023-12-02T16:30:00');
         const now = new Date();
@@ -27,30 +25,17 @@ document.addEventListener('DOMContentLoaded', () => {
             `${horas} horas, ${minutos} minutos e ${segundos} segundos`;
     }
 
-    // Atualiza o contador a cada segundo
     atualizarContador();
     setInterval(atualizarContador, 1000);
 
-    // Função para criar corações fora do container
-    function createHeartOutside() {
+    // Função para criar corações flutuantes fora do container
+    function createHeart() {
         const heart = document.createElement('div');
-        heart.classList.add('heart', 'outside');
-        
-        // Define uma posição aleatória na tela, fora da div ".container"
-        const container = document.querySelector('.container');
-        const containerRect = container.getBoundingClientRect();
-        let top, left;
+        heart.classList.add('heart');
 
-        do {
-            top = Math.random() * 100;
-            left = Math.random() * 100;
-        } while (top >= containerRect.top / window.innerHeight * 100 &&
-                 left >= containerRect.left / window.innerWidth * 100 &&
-                 top <= (containerRect.top + containerRect.height) / window.innerHeight * 100 &&
-                 left <= (containerRect.left + containerRect.width) / window.innerWidth * 100);
-
-        heart.style.top = `${top}vh`;
-        heart.style.left = `${left}vw`;
+        // Limita os corações para dentro da área visível da página
+        heart.style.top = `${Math.random() * 80}vh`; // Limita a altura para evitar rolagem
+        heart.style.left = `${Math.random() * 90}vw`; // Ajusta a largura para manter dentro da tela
 
         document.body.appendChild(heart);
 
@@ -60,32 +45,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 5000);
     }
 
+    // Cria corações iniciais e adiciona mais a cada intervalo
+    for (let i = 0; i < 20; i++) {
+        createHeart();
+    }
+    setInterval(createHeart, 2000);
+
     // Função para criar corações caindo dentro do container
-    function createHeartInside() {
+    function createFallingHeart() {
         const heart = document.createElement('div');
         heart.classList.add('heart', 'inside');
-        
-        const container = document.querySelector('.container');
-        heart.style.top = `-${Math.random() * 10}%`; /* Começa em uma posição aleatória um pouco acima do container */
-        heart.style.left = `${Math.random() * 100}%`; /* Posição lateral aleatória dentro do container */
-        
-        container.appendChild(heart);
+
+        // Posição aleatória dentro do container
+        heart.style.left = `${Math.random() * 80}%`; // Mantém os corações dentro da largura do container
+        heart.style.top = '-10%'; // Começa fora da parte superior do container
+
+        document.querySelector('.container').appendChild(heart);
 
         // Remove o coração após o fim da animação
         setTimeout(() => {
             heart.remove();
-        }, 6000); /* A mesma duração da animação */
+        }, 6000);
     }
 
-    // Cria mais corações fora do container a cada intervalo de tempo
-    for (let i = 0; i < 100; i++) { // Aumenta para 100 corações inicialmente fora do container
-        createHeartOutside();
-    }
-    setInterval(createHeartOutside, 1000); // Cria um coração fora do container a cada 1 segundo
-
-    // Cria corações dentro do container a cada intervalo de tempo
-    for (let i = 0; i < 50; i++) { // Mantém 50 corações inicialmente dentro do container
-        createHeartInside();
-    }
-    setInterval(createHeartInside, 500); // Cria um coração dentro do container a cada 500 ms
+    // Adiciona corações caindo dentro do container
+    setInterval(createFallingHeart, 1500);
 });

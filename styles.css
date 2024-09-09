@@ -29,7 +29,7 @@ header h1 {
     margin: 20px 0;
     font-size: 5vw; /* Tamanho da fonte responsivo */
     color: #ff69b4;
-    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-width: 1.5px;
     -webkit-text-stroke-color: #000000;
 }
 

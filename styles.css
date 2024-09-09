@@ -9,23 +9,25 @@ body {
     flex-direction: column;
     min-height: 100vh;
     position: relative;
+    overflow-x: hidden; /* Impede rolagem horizontal */
 }
 
 .container {
     text-align: center;
-    margin: 10px 0;
-    max-width: 600px;
+    margin: 10px;
     padding: 20px;
+    max-width: 100%; /* Ajusta a largura máxima */
+    box-sizing: border-box; /* Inclui padding e border na largura total */
     position: relative;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.849);
     border-radius: 8px;
-    overflow: hidden;
+    overflow: hidden; /* Garante que os corações não apareçam fora da div "container" */
 }
 
 header h1 {
     margin: 20px 0;
-    font-size: 30px;
+    font-size: 5vw; /* Tamanho da fonte responsivo */
     color: #ff69b4;
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: #000000;
@@ -33,7 +35,7 @@ header h1 {
 
 header p {
     margin: 5px 0;
-    font-size: 22px;
+    font-size: 4vw; /* Tamanho da fonte responsivo */
     color: #ff69b4;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
@@ -45,16 +47,19 @@ header p {
     overflow: hidden;
     border-radius: 12px;
     box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+    position: relative;
 }
 
 .carousel-images {
     display: flex;
     position: relative;
+    overflow: hidden; /* Garante que as imagens não ultrapassem os limites do contêiner */
 }
 
 .carousel-images img {
     width: 100%;
-    height: 700px;
+    height: auto; /* Ajusta a altura automaticamente */
+    max-height: 60vh; /* Limita a altura máxima */
     object-fit: cover;
     display: none;
     transition: opacity 0.5s ease, transform 0.5s;
@@ -67,7 +72,7 @@ header p {
 }
 
 .mensagem {
-    font-size: 16px;
+    font-size: 4vw; /* Tamanho da fonte responsivo */
     margin: 20px 0;
     line-height: 1.5;
     padding: 10px;
@@ -75,8 +80,7 @@ header p {
     border: 1px dashed #ff69b4;
     border-radius: 10px;
     background-color: rgba(255, 182, 193, 0.1);
-    position: relative;
-    z-index: 5;
+    box-sizing: border-box; /* Inclui padding e border na largura total */
 }
 
 .heart {
@@ -85,16 +89,15 @@ header p {
     height: 60px;
     background: url('img/heart.png') no-repeat center center;
     background-size: contain;
+    animation: float 5s infinite;
     pointer-events: none;
     z-index: 1;
 }
 
-/* Corações flutuantes fora do container */
-.heart.outside {
-    animation: float 5s infinite;
+.heart.inside {
+    animation: fall 6s infinite; /* Animação para corações dentro do container */
 }
 
-/* Animação de flutuação para corações fora do container */
 @keyframes float {
     0% {
         transform: translateY(0) scale(0.8);
@@ -110,21 +113,32 @@ header p {
     }
 }
 
-/* Corações caindo dentro do container */
-.heart.inside {
-    animation: fall 6s infinite;
-}
-
-/* Animação de queda para corações dentro do container */
 @keyframes fall {
     0% {
         top: -10%;
         opacity: 1;
-        transform: scale(0.8);
     }
     100% {
         top: 100%;
         opacity: 0;
-        transform: scale(1.2);
+    }
+}
+
+/* Estilo responsivo */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 8vw; /* Tamanho da fonte para dispositivos móveis */
+    }
+
+    header p {
+        font-size: 6vw; /* Tamanho da fonte para dispositivos móveis */
+    }
+
+    .carousel-images img {
+        max-height: 50vh; /* Limita a altura máxima das imagens para dispositivos móveis */
+    }
+
+    .mensagem {
+        font-size: 5vw; /* Tamanho da fonte para dispositivos móveis */
     }
 }
